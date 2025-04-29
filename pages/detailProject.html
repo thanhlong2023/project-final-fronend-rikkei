@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quản Lý Dự Án</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../css/detailproject.css" />
+    <link rel="stylesheet" href="../css/common.css" />
+
+    <!-- font google  -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="./projectManager.html">Quản lý dự án</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="./projectManager.html">Dự án</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./myTask.html">Nhiệm vụ của tôi</a>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link btn btn-link" id="logoutBtn">
+                  Đăng xuất
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Project Info -->
+    <div class="container mt-4">
+      <div
+        class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4"
+      >
+        <div class="title-project">
+          <h4><strong id="projectName"></strong></h4>
+          <p id="projectDescription"></p>
+        </div>
+        <div class="member-project mt-3 mt-md-0">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="mb-0"><strong>Thành viên</strong></h5>
+            <button
+              class="btn btn-outline-primary btn-sm"
+              id="addMember"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              + Thêm thành viên
+            </button>
+          </div>
+
+          <div class="d-flex flex-wrap align-items-center gap-2">
+            <div id="memberList" class="d-flex gap-2 flex-wrap">
+              <div class="d-flex flex-column align-items-center">
+                <span class="badge bg-purple rounded-circle p-2">BA</span>
+                <small class="text-muted text-center"
+                  >Bách Nguyễn<br />Frontend dev</small
+                >
+              </div>
+            </div>
+
+            <span
+              class="rounded-circle p-2"
+              style="
+                background-color: #6e6d6e;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+              "
+              id="menuMember"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              &#8943;
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task Control -->
+      <div
+        class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3"
+      >
+        <button
+          class="btn btn-primary mb-2 mb-md-0"
+          id="addTask"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          + Thêm nhiệm vụ
+        </button>
+
+        <div class="d-flex gap-2 align-items-center">
+          <select class="form-select form-select-sm w-auto" id="sortTasks">
+            <option value="" disabled selected>Sắp xếp theo</option>
+            <option value="dueDate-asc">Hạn chót: Sớm nhất trước</option>
+            <option value="dueDate-desc">Hạn chót: Muộn nhất trước</option>
+            <option value="priority-desc">Độ ưu tiên: Cao đến Thấp</option>
+            <option value="priority-asc">Độ ưu tiên: Thấp đến Cao</option>
+          </select>
+
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="Tìm kiếm nhiệm vụ"
+            id="searchTask"
+          />
+        </div>
+      </div>
+
+      <!-- Task Section -->
+      <div class="task-section">
+        <h5>Danh Sách Nhiệm Vụ</h5>
+
+        <table class="table table-hover table-bordered">
+          <thead class="table-light">
+            <tr>
+              <th>Tên Nhiệm Vụ</th>
+              <th>Người Phụ Trách</th>
+              <th>Ưu Tiên</th>
+              <th>Ngày Bắt Đầu</th>
+              <th>Hạn Chót</th>
+              <th>Tiến Độ</th>
+              <th>Hành Động</th>
+            </tr>
+          </thead>
+
+          <!-- To Do -->
+          <tbody>
+            <tr
+              class="group-toggle"
+              data-bs-toggle="collapse"
+              data-bs-target="#groupTodo"
+            >
+              <td
+                colspan="7"
+                style="
+                  background-color: white;
+                  color: #6c757d;
+                  border: 2px solid #6c757d;
+                "
+              >
+                ▼ To Do
+              </td>
+            </tr>
+          </tbody>
+          <tbody id="groupTodo" class="collapse"></tbody>
+
+          <!-- In Progress -->
+          <tbody>
+            <tr
+              class="group-toggle"
+              data-bs-toggle="collapse"
+              data-bs-target="#groupInProgress"
+            >
+              <td
+                colspan="7"
+                style="
+                  background-color: white;
+                  color: #0d6efd;
+                  border: 2px solid #0d6efd;
+                "
+              >
+                ▼ In Progress
+              </td>
+            </tr>
+          </tbody>
+          <tbody id="groupInProgress" class="collapse"></tbody>
+
+          <!-- Pending -->
+          <tbody>
+            <tr
+              class="group-toggle"
+              data-bs-toggle="collapse"
+              data-bs-target="#groupPending"
+            >
+              <td
+                colspan="7"
+                style="
+                  background-color: white;
+                  color: #fd7e14;
+                  border: 2px solid #fd7e14;
+                "
+              >
+                ▼ Pending
+              </td>
+            </tr>
+          </tbody>
+          <tbody id="groupPending" class="collapse"></tbody>
+
+          <!-- Done -->
+          <tbody>
+            <tr
+              class="group-toggle"
+              data-bs-toggle="collapse"
+              data-bs-target="#groupDone"
+            >
+              <td
+                colspan="7"
+                style="
+                  background-color: white;
+                  color: #198754;
+                  border: 2px solid #198754;
+                "
+              >
+                ▼ Done
+              </td>
+            </tr>
+          </tbody>
+          <tbody id="groupDone" class="collapse"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>© 2025 Quản Lý Dự Án Nhóm. All rights reserved.</footer>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Thông Tin</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="row" id="modalHeader"></div>
+            <div id="modalContent"></div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <button type="button" class="btn btn-primary" id="btnSave">
+              Lưu thay đổi
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/logout.js" type="module"></script>
+    <script src="../js/detailProject2.js" type="module"></script>
+    <script src="../js/taskListProject2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>

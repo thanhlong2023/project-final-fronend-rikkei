@@ -1,0 +1,44 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.container {
+  flex: 1;
+}
+footer {
+  background-color: #f8f9fa;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 14px;
+  margin-top: auto;
+  color: #6c757d;
+}
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+.table-hover tbody tr:hover {
+  background-color: #f1f1f1;
+}
+.badge.bg-purple {
+  background-color: #a64bf4;
+}
+.task-section h5 {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.group-toggle {
+  background-color: #e9ecef;
+  font-weight: bold;
+  cursor: pointer;
+}
+.group-toggle:hover {
+  background-color: #d6d8db;
+}
+.task-section {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

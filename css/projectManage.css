@@ -1,0 +1,54 @@
+body {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h3 {
+  font-weight: bold;
+}
+
+.container {
+  flex: 1;
+}
+
+#findProject {
+  width: 250px;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+table {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th,
+td {
+  vertical-align: middle;
+}
+
+footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: auto;
+}
+
+#addProjectBtn {
+  height: 45px;
+}
+
+.modal-header {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.modal-title {
+  font-weight: bold;
+}
